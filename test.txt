@@ -1,1 +1,0 @@
-git remote set-url origin https://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@github.com/exportDefaultDev/KEGE.git
