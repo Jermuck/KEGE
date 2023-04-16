@@ -1,13 +1,16 @@
-arr = [];
-alf = "ГЕЭ023";
-for x1 in alf:
-    for x2 in alf:
-        for x3 in alf:
-            for x4 in alf:
-                for x5 in alf:
-                    for x6 in alf:
-                        for x7 in alf:
-                            arr += [x1 + x2 + x3 + x4 + x5 + x6 + x7];
-first = [x for x in range(len(arr)) if arr[x] == "ЕГЭ2023"];
-second = [x for x in range(len(arr)) if arr[x] == "2023ЕГЭ"]
-print(second[0] - first[0] - 1)
+import sys
+from  functools import lru_cache
+sys.setrecursionlimit(10000)
+@lru_cache(None)
+def f(x):
+    if x <= 4:
+        return 1;
+    if x > 4:
+        return f(x - 1) + f(x - 3) + g(x - 2);
+@lru_cache(None)
+def g(x):
+    if x <= 1500:
+        return g(x + 1) + g(x + 2) + 1;
+    if x > 1500:
+        return 5;
+print((f(1200) + g(100)) % 10000)
