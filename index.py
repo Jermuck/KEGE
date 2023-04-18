@@ -1,17 +1,11 @@
-print(12341111111 < 10 ** 10);
-def findDels(num):
-    arr = set();
-    for x in range(1, round(num ** 0.5) + 1):
-        if num % x == 0:
-            arr.add(num // x);
-            arr.add(x);
-    if len(arr) == 2: return 1;
-    return 0;
-arr = set()
-for x in range(1, 1111111):
-    summ = sum(int(z) for z in str(x));
-    vuraz = (summ + 2) ** 3
-    value = int(f'1234{x}');
-    if value <= 10 ** 10 and value % vuraz and findDels(summ):
-        arr.add(summ);
-print(sorted(arr))
+s = open("24.txt").readline();
+mx = 0
+for x in 0, 1, 2:
+    k = 0;
+    for y in range(x, len(s) - 2, 3):
+        if s[y] in "81" and s[y+1] in "81" and s[y+2] in "DR":
+            k += 1;
+        else:
+            mx = max(mx, k);
+            k = 0;
+print(mx)
