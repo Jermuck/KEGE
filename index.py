@@ -1,40 +1,36 @@
-import math
-with open('26.txt') as f:
+with open('26_8432.txt') as f:
     n = int(f.readline());
-    k = int(f.readline());
-    price = int(f.readline());
     arr = [];
     for _ in range(n):
-        x, y, m = map(int, f.readline().split());
-        arr.append((x, y, m));
-kamera_1 = [0] * k
-kamera_2 = [0] * k
-kamera_3 = [0] * k
-money = 0;
-count = 0;
+        x, y, z = f.readline().split();
+        arr.append((int(x), int(x) + int(y), z));
+avto = [0] * 70;
+bus = [0] * 30;
 arr.sort()
-for client in arr:
-    tLevel = client[2];
-    time = math.ceil((client[1] - client[0]) / 60 / 60);
-    if tLevel == 1:
-        for j in range(k):
-            if kamera_1[j] <= client[0]:
-                kamera_1[j] = client[1] + 60;
-                count += 1;
-                money += time * price * 1;
+count = 0;
+k_obj = 0;
+for st, end, tp in arr:
+    flag = False;
+    if tp == "A":
+        for j in range(70):
+            if avto[j] <= st:
+                avto[j] = end;
+                flag = True;
+                k_obj += 1;
                 break;
-    if tLevel == 2:
-        for j in range(k):
-            if kamera_2[j] <= client[0]:
-                kamera_2[j] = client[1] + 60;
+    if tp == "B":
+        for j in range(30):
+            if bus[j] <= st:
+                bus[j] = end;
+                flag = True;
                 count += 1;
-                money += time * price * 2;
+                k_obj += 1;
                 break;
-    if tLevel == 3:
-        for j in range(k):
-            if kamera_3[j] <= client[0]:
-                kamera_3[j] = client[1] + 60;
-                count += 1;
-                money += time * price * 4
+    if flag == False and tp =="A":
+        for j in range(30):
+            if bus[j] <= st:
+                bus[j] = end;
+                flag = True;
+                k_obj += 1;
                 break;
-print(count, money)
+print(count, n - k_obj);
